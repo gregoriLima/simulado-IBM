@@ -37,7 +37,6 @@ public class ConsumidorDeContas implements Callable<List> { //Utilizado Callable
 
 	public ConsumidorDeContas(BlockingQueue<Conta> filaContas) {
 		this.filaContas = filaContas;	
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 	}
 
 

@@ -40,8 +40,7 @@ public class Application extends SpringBootServletInitializer implements Command
 	private BlockingQueue<String> filaArquivosContas;
 	
 	public static void main(String[] args) {
-	
-		args = new String[]{"C:\\ibm\\contas.csv"};
+		//args = new String[]{"C:\\ibm\\contas.csv"};
 		SpringApplication.run(Application.class, args);
 		
 	}
