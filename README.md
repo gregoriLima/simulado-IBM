@@ -3,6 +3,7 @@
 - SpringBoot
 - JUnit Tests
 - REST WS
+- Scalable
 
 
 # Schema:
