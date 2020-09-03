@@ -3,6 +3,7 @@
 - SpringBoot
 - JUnit Tests
 - REST WS
+- ThreadFactory for ExecutorServices
 - Scalable
 
 
