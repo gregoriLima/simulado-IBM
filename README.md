@@ -1,13 +1,13 @@
 - MVC
 - Java 11
 - SpringBoot
-- JUnit Tests
+- Lombok
 - REST WS
 - ThreadFactory for ExecutorServices
 - Scalable
 
 
-Tests:
+JUnit Tests:
 - REST-Assured
 - MockMVC Framework
 - Java 11 HTTP Client API (can be easly used for HTTP2 requests too)
