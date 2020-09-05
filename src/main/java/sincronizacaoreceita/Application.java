@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
+import org.assertj.core.api.filter.Filters;
 import org.junit.runner.RunWith;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -44,27 +46,34 @@ public class Application extends SpringBootServletInitializer implements Command
 
 	public static void main(String[] args) throws IOException {
 	
-//		File resourcesDirectory = new File("src/main/resources/contas.csv");
-//	
-//	args = new String[] {resourcesDirectory.getAbsolutePath()};
-//		
-		
-		
+		File resourcesDirectory = new File("src/main/resources/contas.csv");
+	
+		args = new String[] {resourcesDirectory.getAbsolutePath()};
+
 		SpringApplication.run(Application.class, args);
 		
 	}
 
 	@Override
 	public void run(String... inputFilePath) throws Exception {
-
+		
 		if (inputFilePath.length == 0) {
-			 log.error("Adicione um caminho válido para o arquivo csv");
+			 log.error("Adicione ao menos um arquivo csv para atualização.");
+			return;
+		}
+		
+						//verifica se o arquivo passado é um .csv, caso não seja, tira da lista passada
+		inputFilePath = Arrays.stream(inputFilePath).filter(s -> s.endsWith(".csv")).toArray(String[]::new);
+	
+		
+		if (inputFilePath.length == 0) {
+			 log.error("Adicione um arquivo csv válido");
 			return;
 		}
 
+		log.info("Arquivos válidos para processamento" + Arrays.asList(inputFilePath));
+		
 		new ServidorDeAtualizacoes(inputFilePath);
-		
-		
 		
 	}
 

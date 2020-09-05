@@ -54,7 +54,7 @@ class WSTest {
 		Conta c1 = new Conta();
 		c1.setAgencia("1234");
 		c1.setConta("123-4");
-		c1.setSaldo("123,123");
+		//c1.setSaldo("123,123");
 		
 		Conta c2 = new Conta();
 		c2.setAgencia("1234");

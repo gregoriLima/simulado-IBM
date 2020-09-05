@@ -8,6 +8,11 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+
+import org.assertj.core.api.filter.Filters;
+
+import ch.qos.logback.core.filter.Filter;
 
 public class ServidorDeAtualizacoes {
 
@@ -27,7 +32,9 @@ public class ServidorDeAtualizacoes {
 		this.estaRodando.set(true);
 		
 		//Adiciona cada path recebido em uma BlockingQueue, preferido um Array do que um List por questão de performance
-		this.filaArquivosContas = new ArrayBlockingQueue<>(inputFilePath.length, true, Arrays.asList(inputFilePath));
+		this.filaArquivosContas = new ArrayBlockingQueue<>(inputFilePath.length, true, Arrays.asList(inputFilePath).stream()
+																												  .filter(c -> c.contains(".csv"))
+																												  .collect(Collectors.toList()));
 					//definido que o FIFO necessita ser consumido na ordem
 		
 		iniciarConsumidoresDeArquivos();
