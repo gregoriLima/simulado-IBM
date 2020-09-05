@@ -1,5 +1,7 @@
 package sincronizacaoreceita;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,6 +15,7 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.commons.lang3.StringUtils;
+import org.junit.runner.RunWith;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -20,6 +23,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.opencsv.CSVWriter;
 import com.opencsv.bean.ColumnPositionMappingStrategy;
@@ -37,10 +42,14 @@ import sincronizacaoreceita.model.Conta;
 @SpringBootApplication
 public class Application extends SpringBootServletInitializer implements CommandLineRunner  {
 
-	private BlockingQueue<String> filaArquivosContas;
+	public static void main(String[] args) throws IOException {
 	
-	public static void main(String[] args) {
-		//args = new String[]{"C:\\ibm\\contas.csv"};
+//		File resourcesDirectory = new File("src/main/resources/contas.csv");
+//	
+//	args = new String[] {resourcesDirectory.getAbsolutePath()};
+//		
+		
+		
 		SpringApplication.run(Application.class, args);
 		
 	}

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -25,7 +27,8 @@ public class MainController {
 	//porta de escuta: 8081
 	
 	
-	@RequestMapping(value="/atualiza", method = RequestMethod.POST)
+	@RequestMapping(value="/atualiza", method = RequestMethod.POST, produces = "application/json")
+	
 	public @ResponseBody String configuracoes(@RequestBody String data) {
 
 		//convertendo os dados recebidos:
