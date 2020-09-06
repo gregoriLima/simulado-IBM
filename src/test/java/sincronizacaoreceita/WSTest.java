@@ -1,13 +1,8 @@
 package sincronizacaoreceita;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -16,8 +11,6 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.Test;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.http.HttpStatus;
 
@@ -25,17 +18,12 @@ import java.net.http.HttpRequest.BodyPublishers;
 import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jayway.jsonpath.JsonPath;
-
-
 import io.restassured.*;
-import io.restassured.response.Response;
 import sincronizacaoreceita.model.Conta;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
 import static io.restassured.RestAssured.with;
 import static org.hamcrest.Matchers.lessThan;
 
@@ -71,6 +59,7 @@ class WSTest {
 	}
 	
 	
+	
 	@Test
 	void testeComRestAssured() {
 
@@ -86,6 +75,7 @@ class WSTest {
 	}
 	
 	
+	
 	@Test
 	public void tempoDeResposta() { //tempo de resposta deve ser menor que 5s.
 	  
@@ -96,6 +86,7 @@ class WSTest {
 		.time(lessThan(5L), TimeUnit.SECONDS);
 		
 	}
+	
 	
 	
 	@Test 

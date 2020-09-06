@@ -29,7 +29,7 @@ import sincronizacaoreceita.model.Conta;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ApplicationTests {
+class APITestWithMock {
 
 	 @Autowired
 	  private MockMvc mockMvc;
