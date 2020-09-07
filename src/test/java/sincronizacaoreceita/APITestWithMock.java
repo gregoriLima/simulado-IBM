@@ -1,9 +1,11 @@
 package sincronizacaoreceita;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.net.URI;
@@ -27,43 +29,95 @@ import com.google.gson.GsonBuilder;
 
 import sincronizacaoreceita.model.Conta;
 
+
 @SpringBootTest
 @AutoConfigureMockMvc
 class APITestWithMock {
 
 	 @Autowired
 	  private MockMvc mockMvc;
+	
 	 
 	@Test //Teste utilizando o mockMVC
-	void testaUmaConta() throws Exception {
+	void testaUmaContaOK() throws Exception {
+		
+			Conta c1 = new Conta();
+			c1.setAgencia("111");
+			c1.setConta("123-4");
+			c1.setSaldo("123,12");
+			c1.setStatus("A");
+			
+			Gson gson = new GsonBuilder().create();
+			String json = gson.toJson(c1);
+		
+			var s = mockMvc.perform(post("http://localhost:8081/atualiza")
+					.contentType("application/json")
+		            .content(json))
+					.andExpect(status().isOk()) //verifica status 200 OK
+					.andExpect(content().contentType(MediaType.APPLICATION_JSON)) //verifica retorno JSON
+					.andExpect(jsonPath("$.resultado", is("sucesso")));
+
+
+			
+		//	System.out.println("\nResposta do servidor: " + s.andReturn().getResponse().getContentAsString());
+		//	System.out.println();
+		
+		}
+		
+		
+	@Test //Teste utilizando o mockMVC
+	void testaUmaContaNOK() throws Exception {
 	
 		Conta c1 = new Conta();
-		c1.setAgencia("1234");
+		c1.setAgencia("111");
 		c1.setConta("123-4");
-		c1.setSaldo("123,123");
-		
-		Conta c2 = new Conta();
-		c2.setAgencia("1234");
-		c2.setConta("123-4");
-		c2.setSaldo("123,123");
-		
-		List l = new ArrayList();
-		l.add(c1);
-		l.add(c2);
+		c1.setSaldo("123,124"); //colocado um digito a mais no saldo
+		c1.setStatus("A");
 		
 		Gson gson = new GsonBuilder().create();
-		String json = gson.toJson(l);
+		String json = gson.toJson(c1);
 	
-		mockMvc.perform(post("http://localhost:8081/atualiza")
+		var s = mockMvc.perform(post("http://localhost:8081/atualiza")
 				.contentType("application/json")
 	            .content(json))
-				.andExpect(status().isOk()) //verifica status 200 OK
-				.andExpect(content().contentType(MediaType.APPLICATION_JSON)); //verifica retorno JSON
+				.andExpect(status().isNotAcceptable()); //verifica status 406 NotAcceptable
+				
 
+		
+		System.out.println("\nResposta do servidor: " + s.andReturn().getResponse().getContentAsString());
+		System.out.println();
+	
 	}
 	
-	
-	
+//	
+//	@Test 
+//	void testaListaDeContas() throws Exception {
+//	
+//		Conta c1 = new Conta();
+//		//c1.setAgencia("abc");
+//		c1.setConta("123-4");
+//		c1.setSaldo("123,123");
+//		
+//		Conta c2 = new Conta();
+//		c2.setAgencia("1234");
+//		c2.setConta("123-4");
+//		c2.setSaldo("123,123");
+//		
+//		List l = new ArrayList();
+//		l.add(c1);
+//		l.add(c2);
+//		
+//		Gson gson = new GsonBuilder().create();
+//		String json = gson.toJson(l);
+//	
+//		mockMvc.perform(post("http://localhost:8081/atualiza")
+//				.contentType("application/json")
+//	            .content(json))
+//				.andExpect(status().isOk()) //verifica status 200 OK
+//				.andExpect(content().contentType(MediaType.APPLICATION_JSON)); //verifica retorno JSON
+//
+//	}
+//	
 
 
 }

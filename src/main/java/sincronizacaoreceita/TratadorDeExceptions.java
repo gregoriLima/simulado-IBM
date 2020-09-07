@@ -10,7 +10,7 @@ public class TratadorDeExceptions implements UncaughtExceptionHandler {
 	@Override
 	public void uncaughtException(Thread t, Throwable e) {
 
-		log.error("Exception na Thread: " + t.getName() + " " + e.getMessage());
+		log.error("Exception na Thread: " + t.getName() + " : " + e.getMessage());
 		
 	}
 

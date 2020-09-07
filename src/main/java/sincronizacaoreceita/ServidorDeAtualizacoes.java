@@ -32,10 +32,11 @@ public class ServidorDeAtualizacoes {
 		this.estaRodando.set(true);
 		
 		//Adiciona cada path recebido em uma BlockingQueue, preferido um Array do que um List por questão de performance
+		//e definido que o FIFO necessita ser consumido na ordem
 		this.filaArquivosContas = new ArrayBlockingQueue<>(inputFilePath.length, true, Arrays.asList(inputFilePath).stream()
 																												  .filter(c -> c.contains(".csv"))
 																												  .collect(Collectors.toList()));
-					//definido que o FIFO necessita ser consumido na ordem
+					
 		
 		iniciarConsumidoresDeArquivos();
 		

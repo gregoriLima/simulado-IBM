@@ -20,19 +20,22 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.core.env.Environment;
 import org.springframework.test.context.ActiveProfiles;
 
+
+//teste passando um argumento para Application.java
+
 @SpringBootTest
 class ApplicationArgsTest {
 
 	static {
-			File resourcesDirectory = new File("src/main/resources/contas.csv");
-			System.setProperty("path", resourcesDirectory.getAbsolutePath());
-			System.setProperty("spring.profiles.active", "test");
+			File resourcesDirectory = new File("src/main/resources/contas.csv"); //definindo o caminho do arquivo contas.csv
+			System.setProperty("path", resourcesDirectory.getAbsolutePath()); //definindo a propriedade 'path' com o valor do caminho
+			System.setProperty("spring.profiles.active", "test"); //definindo o profile de teste para o spring
 	}
 	
 	@Test
 	void test() throws InterruptedException {
 		
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		
 	}
 

@@ -62,6 +62,7 @@ public class Application extends SpringBootServletInitializer implements Command
 	@Override
 	public void run(String... inputFilePath) throws Exception {
 	
+		//caso o profile seja de teste, busca o valor da propriedade de sistema 'path'
 		if(activeProfile.equals("test"))
 			inputFilePath = new String[]{System.getProperty("path")};
 			

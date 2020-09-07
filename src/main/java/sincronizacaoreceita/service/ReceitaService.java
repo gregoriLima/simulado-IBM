@@ -1,4 +1,4 @@
-package sincronizacaoreceita;
+package sincronizacaoreceita.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +21,7 @@ public class ReceitaService {
         
         // Formato conta: 000000
         if (conta == null || conta.length() != 6) {
-        	 return false;
+        	  return false;
         }
         
         // Tipos de status validos:

@@ -93,28 +93,16 @@ public class ConsumidorDeArquivos implements Runnable {
 				
 				//Lendo o arquivo
 				Reader reader = Files.newBufferedReader(Paths.get(arquivoCSVPath));
-				
-				
-				
-				
-				
-				
+	
 					//Configuração para converter cada linha da tabela em um objeto 'Conta'
 					List<Conta> csvToBeanList = new CsvToBeanBuilder(reader).withSeparator(';').withType(Conta.class)
 							.withIgnoreLeadingWhiteSpace(true).withExceptionHandler(new ExceptionHandlerCSV()).build().parse();
 					
 					//adiciona cada conta em uma fila
 					filaContas = new ArrayBlockingQueue<>((int)csvToBeanList.stream().count(), true, csvToBeanList);//csvToBean.stream().collect(Collectors.toList()));
-				
-			
-				
-				
+	
 					iniciarConsumidoresDeContas(); //inicia os consumidores de contas
-				
-				
-				
-				
-				
+			
 				//definindo a ordem das colunas
 				//poderiam ter sido pegos os nomes dos cabeçalhos via Reflection...
 				String[] memberFieldsToBindTo = { "agencia", "conta", "saldo", "status", "resultado" };

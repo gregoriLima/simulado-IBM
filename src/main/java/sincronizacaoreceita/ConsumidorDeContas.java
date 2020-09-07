@@ -29,6 +29,7 @@ import com.opencsv.bean.StatefulBeanToCsvBuilder;
 
 import lombok.extern.log4j.Log4j2;
 import sincronizacaoreceita.model.Conta;
+import sincronizacaoreceita.service.ReceitaService;
 
 @Log4j2
 public class ConsumidorDeContas implements Callable<List> { //Utilizado Callable para poder se ter um retorno
@@ -54,8 +55,8 @@ public class ConsumidorDeContas implements Callable<List> { //Utilizado Callable
 						conta.setResultado(
 								new ReceitaService()
 									.atualizarConta(
-										StringUtils.leftPad(conta.getAgencia(), 4, '0'),
-										new StringBuilder(conta.getConta()).deleteCharAt(conta.getConta().indexOf("-")).toString(), //removendo o '-' de conta
+										StringUtils.leftPad(conta.getAgencia(), 4, '0'), //formatando agência com 4 digitos
+										StringUtils.leftPad(new StringBuilder(conta.getConta()).deleteCharAt(conta.getConta().indexOf("-")).toString(), 6, '0'), //removendo o '-' de conta e deixando com 6 digitos
 										Double.parseDouble(conta.getSaldo().replace(',', '.')),  //substituindo o ',' do arquivo original por '.'
 										conta.getStatus()) == true ? "sucesso":"falhou");
 						
