@@ -1,3 +1,5 @@
+Project created for Sicred challange
+
 - MVC
 - Java 11
 - SpringBoot
