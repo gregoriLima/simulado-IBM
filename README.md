@@ -1,4 +1,4 @@
-Project created for Sicred challange
+Project created for IBM/Sicredi challange
 
 - MVC
 - Java 11
